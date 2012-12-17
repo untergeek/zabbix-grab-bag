@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# This script is similar to zext_ssl_cert, but it only verifies that the ssl chain is valid.
+#
+# Args:
+# $1 = hostname.  Should be FQDN of site with certificate you want to check.
+#                 Will verify that certificate is for this hostname via a CN check.
+# $2 = port.  More than likely 443, but just in case it's different, you can specify.
+#
+# Return:
+# 0 (fail)
+# 1 (success, valid chain)
+# 2 (bad IP)
+# 3 (expired certificate)
+
+# If you're using a *.example.com (star cert, here) it will not try to double-check the CN hostname
+# against the provided hostname ($1).
+
+
+HOST=$1
+PORT=$2
+RAWRESULT=$(openssl s_client -connect $HOST:$PORT -showcerts </dev/null 2>/dev/null | grep -c "Verify return code: 0 (ok)")
+
+
+if [ "$RAWRESULT" = "1" ]; then
+   echo 1
+else
+   CHECK_EXPIRY=$(openssl s_client -connect ${HOST}:${PORT} -showcerts </dev/null 2>/dev/null | sed -n '/BEGIN CERTIFICATE/,/END CERT/p' | openssl x509 -text 2>/dev/null | sed -n 's/ *Not After : *//p')
+   if [ -n "$CHECK_EXPIRY" ]; then
+       END_DATE_SECONDS=$(date '+%s' --date "$CHECK_EXPIRY")
+       NOW_SECONDS=$(date '+%s')
+       if [ "$END_DATE_SECONDS" -lt "$NOW_SECONDS" ]; then
+           # Expired certificate
+           echo 3
+       else 
+          CNHOST=$(openssl s_client -connect $HOST:$PORT -showcerts </dev/null 2>/dev/null | grep -i subject | awk -F CN\= '{print $2}' | awk -F \/ '{print $1}' )
+          IS_STAR=$(echo $CNHOST | grep -c '*')
+          if [ "$IS_STAR" -gt "0" ]; then
+             # It's a star cert, don't bother with a reverse check
+             echo 0
+          else
+             CNIP=$(dig ${CNHOST} +short | tail -1)
+             if [ ! "$HOST" = "$CNIP" ]; then
+                # Bad IP 
+                echo 2
+             else
+                # Fail
+                echo 0 
+             fi
+          fi
+       fi
+   fi
+fi
+

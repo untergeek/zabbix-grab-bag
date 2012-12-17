@@ -5,7 +5,7 @@ This is a collection of miscellaneous scripts for Zabbix data collection, mainte
 
 I will endeavor to keep them categorized by directory and well documented, but some have been around for a while and may not be well documented yet.
 
-These are made available by me under an Apache 2.0 license.
+These are made available by me under an Apache 2.0 license, except where specifically licensed under some other license.
 
 http://www.apache.org/licenses/LICENSE-2.0.html
 

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# This collects apache stats from the module of the same name and sends them back to Zabbix
+# using zabbix_sender.  No temp files are harmed (or even created) in the execution of this
+# script.
+#
+# The ZEXT_ENV will contain the APACHESTATS variable assignment.  Be sure it's correctly
+# set in that file.
+
+# Source the ZEXT_ENV file (your path may vary)
+. /path/to/ZEXT_ENV
+
+HOST=$(host $1 | sed -e 's#\.$##' | awk '{print $5}' | sed -e 's/\.$//')
+URL="$2"
+DEBUG_LOG=/tmp/apachestats.log
+
+#log "INFO" "$0 HOST=$HOST"
+#log "INFO" "$0 URL=$URL"
+
+TMP=$(${APACHESTATS} $HOST "$URL")
+response=$?
+
+if [ "$response" -eq "0" ]; then
+  for ZABBIX_OUT in $(echo $TMP | tr " " "\n"); do
+       echo ${ZABBIX_OUT} | tr ":" " "
+  done | ${ZABBIX_SENDER} -z ${ZABBIX_SERVER} -i - &> /dev/null
+fi
+
+echo $response
+exit $response

@@ -1,0 +1,17 @@
+
+ZABBIX_SERVER=tim.prod.broadjump.com
+
+SCRIPTDIR=/home/zabbix/externalscripts
+CURL=/usr/bin/curl
+WGET=/usr/bin/wget
+APACHESTATS=${SCRIPTDIR}/apache-stats.pl
+ZABBIX_SENDER=/usr/local/bin/zabbix_sender
+
+#################################################
+### You need to set DEBUG_LOG to your log file!
+log()
+{
+  DATE=`date '+[ %Y-%m-%d %H:%M:%S ]'`
+  echo "${DATE} [${1}] ${2}" >> ${DEBUG_LOG}
+}
+

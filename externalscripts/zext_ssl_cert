@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# This script does some simple checking of SSL certificates.
+#
+# Args:
+# $1 = hostname.  Should be FQDN of site with certificate you want to check.
+#                 Will verify that certificate is for this hostname via a CN check.
+# $2 = port.  More than likely 443, but just in case it's different, you can specify.
+#
+# Return:
+# Number of seconds until expiry, or 0, if expired.  The associated template is on a 1 month escalation.
+# If you're using a *.example.com (star cert, here) it will not try to double-check the CN hostname
+# against the provided hostname ($1).
+# If the host and CN do not match, this script is set to send back a value of 3024000 (5 weeks in seconds)
+# to prevent false alerts.  Make sure you're checking the right hosts!
+
+HOST=$1
+PORT=$2
+RAWRESULT=$(openssl s_client -connect ${HOST}:${PORT} -showcerts </dev/null 2>/dev/null | sed -n '/BEGIN CERTIFICATE/,/END CERT/p' | openssl x509 -text 2>/dev/null | sed -n 's/ *Not After : *//p')
+if [ -n "$RAWRESULT" ]; then
+    END_DATE_SECONDS=$(date '+%s' --date "$RAWRESULT")
+    NOW_SECONDS=$(date '+%s')
+    if [ "$END_DATE_SECONDS" -gt "$NOW_SECONDS" ]; then
+       echo "($END_DATE_SECONDS-$NOW_SECONDS)" | bc
+    else
+       CNHOST=$(openssl s_client -connect $HOST:$PORT -showcerts </dev/null 2>/dev/null | grep -i subject | awk -F CN\= '{print $2}' | awk -F \/ '{print $1}' )
+       IS_STAR=$(echo $CNHOST | grep -c '*')
+       if [ "$IS_STAR" -gt "0" ]; then
+          # It's a star cert, don't bother with a reverse check
+          echo 0
+       else
+          CNIP=$(dig ${CNHOST} +short | tail -1)
+          if [ ! "$HOST" = "$CNIP" ]; then
+             # Bad IP, send back "5 weeks" or 35 days to prevent trigger 
+             echo 3024000
+          else
+             # Expired
+             echo 0 
+          fi
+       fi
+    fi
+fi
+
