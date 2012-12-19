@@ -1,29 +1,53 @@
 #!/bin/bash
 
-# PIDFILE could be autodiscovered, as could REDISLOG if an anticipated path to the redis.conf were known.
-# This script presupposes that the redis binary is run by a redis user.
+# Author: Aaron Mildenstein
 #
-# Note: This script also depends on the filetime.pl in this repo to determine the age of the redis log file.
+# This script presumes redis is running locally.
+#
+# You can extract a list of potential values by running:
+# redis-cli INFO
+# 
+# This is by no means an exhaustive list.  It could be extended to report pubsub or other statistics.
+# Just fill in the gaps.
 
-PIDFILE=""
-REDISLOG=""
-PATH=$PATH:/usr/local/bin
+PIDFILE=/var/run/redis/redis.pid
+PATH=/opt/zabbix/bin:$PATH:/usr/local/bin
+
+# $1 = Zabbix "key," or the redis INFO key whose value we want
+# $2 = Redis list or pubsub key
+# $3 = Redis db number
+
+# We need at least one arg
+if [ "x$1" = "x" ]; then 
+   exit 1
+fi
+
+# If no DB number is provided, presume 0
+if [ "x$3" = "x" ]; then 
+   DB=0
+else
+   DB=$3
+fi
 
 case "$1" in
-   "running"       ) if [ -e "$PIDFILE" ]; then
-			ps auwwx | grep $(cat $PIDFILE) | grep -c ^redis
-		     else
-			echo 0
-		     fi ;;
-   "buffer_size"   ) tail -20 $REDISLOG | grep "bytes in use" | tail -1 | awk '{print $11}' ;;
-   "queue"	   ) ### Check queue depth 
-			if [ "x$3" = "x" ]; then
-			   redis-cli LLEN $2 | sed -e 's#(integer)\ ##'
-			else
-			   redis-cli -n $3 LLEN $2 | sed -e 's#(integer)\ ##'
-                        fi
-                        ;;
-   "client_count"  ) tail -20 $REDISLOG | grep "bytes in use" | tail -1 | awk '{print $6}' ;;
-   "logfile_age"   ) /home/zabbix/bin/filetime.pl $REDISLOG ;;
-   *     	   ) echo "ZBX_NOTSUPPORTED"        ;;
+  "running"   	) if [ -e "${PIDFILE}" ]; then
+			RESULT=$(ps auwwx | grep $(cat ${PIDFILE}) | grep -c redis-server)
+	          else
+			RESULT=0
+	  	  fi 
+		  ;;
+  "list_length"	) # We need a second arg here:
+		  if [ "x$2" = "x" ]; then
+		     exit 1
+                  else
+		     RESULT=$(redis-cli -n ${DB} LLEN ${2} | sed -e 's#(integer)\ ##') 
+		  fi 
+		  ;;
+  *		) RESULT=$(redis-cli -n ${DB} INFO | grep ${1}: | awk -F: '{print $2}') ;;
 esac
+
+if [ "x${RESULT}" = "x" ]; then
+   echo "ZBX_NOTSUPPORTED"
+else
+   echo ${RESULT}
+fi
