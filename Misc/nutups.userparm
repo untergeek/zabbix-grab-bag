@@ -1,0 +1,1 @@
+UserParameter=nutups[*],/opt/zabbix/bin/nutups.sh $1
