@@ -1,0 +1,1 @@
+UserParameter=ESzabbix[*],/opt/zabbix/bin/ESzabbix.py $1 $2
