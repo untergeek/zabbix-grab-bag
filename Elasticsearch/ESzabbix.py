@@ -10,6 +10,14 @@ def zbx_fail():
     print "ZBX_NOTSUPPORTED"
     sys.exit(2)
     
+searchkeys = ['query_total', 'fetch_time_in_millis', 'fetch_total', 'fetch_time', 'query_current', 'fetch_current', 'query_time_in_millis']
+getkeys = ['missing_total', 'exists_total', 'current', 'time_in_millis', 'missing_time_in_millis', 'exists_time_in_millis', 'total']
+docskeys = ['count', 'deleted']
+indexingkeys = ['delete_time_in_millis', 'index_total', 'index_current', 'delete_total', 'index_time_in_millis', 'delete_current']
+storekeys = ['size_in_bytes', 'throttle_time_in_millis']
+cachekeys = ['filter_size_in_bytes', 'field_size_in_bytes', 'field_evictions']
+returnval = None
+
 # __main__
 
 # We need to have two command-line args: 
@@ -27,16 +35,25 @@ except Exception, e:
 
 
 if sys.argv[1] == 'cluster':
-    if sys.argv[2] == 'index_total':
+    if sys.argv[2] in indexingkeys or storekeys or getkeys or docskeys or searchkeys:
         nodestats = conn.cluster_stats()
-        index_total = 0
+        subtotal = 0
         for nodename in nodestats['nodes']:
-            indexstats = nodestats['nodes'][nodename]['indices']['indexing']
+            if sys.argv[2] in indexingkeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['indexing']
+            elif sys.argv[2] in storekeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['store']
+            elif sys.argv[2] in getkeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['get']
+            elif sys.argv[2] in docskeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['docs']
+            elif sys.argv[2] in searchkeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['search']
             try:
-                index_total += indexstats['index_total']
+                subtotal += indexstats[sys.argv[2]]
             except Exception, e:
                 pass
-        print index_total
+        returnval = subtotal
 
     else:
         # Try to pull the managers object data
@@ -59,34 +76,38 @@ if sys.argv[1] == 'cluster':
                 print 2
             else:
                 zbx_fail()
-        # Otherwise just return the value
-        else:
-            print returnval
 
 else: # Not clusterwide, check the next arg
 
     nodestats = conn.cluster_stats()
-    if sys.argv[2] == 'index_total':
-        for nodename in nodestats['nodes']:
-            if sys.argv[1] in nodestats['nodes'][nodename]['name']:
+    for nodename in nodestats['nodes']:
+        if sys.argv[1] in nodestats['nodes'][nodename]['name']:
+            if sys.argv[2] in indexingkeys:
                 indexstats = nodestats['nodes'][nodename]['indices']['indexing']
-                try:
-                    print indexstats['index_total']
-                except Exception, e:
-                    print "ZBX_NOTSUPPORTED"
+            elif sys.argv[2] in storekeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['store']
+            elif sys.argv[2] in getkeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['get']
+            elif sys.argv[2] in docskeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['docs']
+            elif sys.argv[2] in searchkeys:
+                indexstats = nodestats['nodes'][nodename]['indices']['search']
+            try:
+                returnval = indexstats[sys.argv[2]]
+            except Exception, e:
+                pass
 
-    else:
-        for nodename in nodestats['nodes']:
-            if sys.argv[1] in nodestats['nodes'][nodename]['name']:
-                nodecache = nodestats['nodes'][nodename]['indices']['cache']
-                if sys.argv[2] == "filter_size_in_bytes":
-                    print nodecache['filter_size_in_bytes']
-                elif sys.argv[2] == "field_size_in_bytes":
-                    print nodecache['field_size_in_bytes']
-                elif sys.argv[2] == "field_evictions":
-                    print nodecache['field_evictions']
-                else:
-                    print "ZBX_NOTSUPPORTED"
+        else:
+            nodecache = nodestats['nodes'][nodename]['indices']['cache']
+            if sys.argv[2] in cachekeys:
+                returnval = nodecache[sys.argv[2]]
+
+# If we somehow did not get a value here, that's a problem.  Send back the standard 
+# ZBX_NOTSUPPORTED
+if returnval is None:
+    zbx_fail()
+else:
+    print returnval
 
 # End
 
