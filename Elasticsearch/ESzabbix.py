@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Authored by Aaron Mildenstein on 18 DEC 2012
+# Created by Aaron Mildenstein on 19 SEP 2012
 
 from pyes import *
 import sys
@@ -27,31 +27,41 @@ except Exception, e:
 
 
 if sys.argv[1] == 'cluster':
-    # Try to pull the managers object data
-    try:
-        escluster = managers.Cluster(conn)
-    except Exception, e:
-        zbx_fail()
-    # Try to get a value to match the key provided
-    try:
-        # This is the dictionary which results from the escluster.health() check.
-        # {u'status': u'green', u'number_of_nodes': 8, u'unassigned_shards': 0, u'timed_out': False, u'active_primary_shards': 116, u'cluster_name': u'elasticsearch', u'relocating_shards': 0, u'active_shards': 232, u'initializing_shards': 0, u'number_of_data_nodes': 4}
-        returnval = escluster.health()[sys.argv[2]]
-    except Exception, e:
-        zbx_fail()
-    # If the key is "status" then we need to map that to an integer
-    if sys.argv[2] == 'status':
-        if returnval == 'green':
-            print 0
-        elif returnval == 'yellow':
-            print 1
-        elif returnval == 'red':
-            print 2
-        else:
-            zbx_fail()
-    # Otherwise just return the value
+    if sys.argv[2] == 'index_total':
+        nodestats = conn.cluster_stats()
+        index_total = 0
+        for nodename in nodestats['nodes']:
+            indexstats = nodestats['nodes'][nodename]['indices']['indexing']
+            try:
+                index_total += indexstats['index_total']
+            except Exception, e:
+                pass
+        print index_total
+
     else:
-        print returnval
+        # Try to pull the managers object data
+        try:
+            escluster = managers.Cluster(conn)
+        except Exception, e:
+            zbx_fail()
+        # Try to get a value to match the key provided
+        try:
+            returnval = escluster.health()[sys.argv[2]]
+        except Exception, e:
+            zbx_fail()
+        # If the key is "status" then we need to map that to an integer
+        if sys.argv[2] == 'status':
+            if returnval == 'green':
+                print 0
+            elif returnval == 'yellow':
+                print 1
+            elif returnval == 'red':
+                print 2
+            else:
+                zbx_fail()
+        # Otherwise just return the value
+        else:
+            print returnval
 
 else: # Not clusterwide, check the next arg
 
