@@ -16,6 +16,7 @@ docskeys = ['count', 'deleted']
 indexingkeys = ['delete_time_in_millis', 'index_total', 'index_current', 'delete_total', 'index_time_in_millis', 'delete_current']
 storekeys = ['size_in_bytes', 'throttle_time_in_millis']
 cachekeys = ['filter_size_in_bytes', 'field_size_in_bytes', 'field_evictions']
+clusterkeys = searchkeys + getkeys + docskeys + indexingkeys + storekeys
 returnval = None
 
 # __main__
@@ -35,7 +36,7 @@ except Exception, e:
 
 
 if sys.argv[1] == 'cluster':
-    if sys.argv[2] in indexingkeys or storekeys or getkeys or docskeys or searchkeys:
+    if sys.argv[2] in clusterkeys:
         nodestats = conn.cluster_stats()
         subtotal = 0
         for nodename in nodestats['nodes']:
@@ -69,11 +70,11 @@ if sys.argv[1] == 'cluster':
         # If the key is "status" then we need to map that to an integer
         if sys.argv[2] == 'status':
             if returnval == 'green':
-                print 0
+                returnval = 0
             elif returnval == 'yellow':
-                print 1
+                returnval = 1
             elif returnval == 'red':
-                print 2
+                returnval = 2
             else:
                 zbx_fail()
 
