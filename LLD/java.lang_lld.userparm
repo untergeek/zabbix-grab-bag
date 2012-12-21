@@ -1,0 +1,1 @@
+UserParameter=java.lang_lld[*],/opt/zabbix/bin/java.lang_lld.sh $1 $2 $3
