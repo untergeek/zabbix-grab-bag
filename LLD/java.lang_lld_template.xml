@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2012-12-21T04:09:59Z</date>
+    <date>2012-12-21T15:46:01Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -897,26 +897,7 @@ Tenured Gen</description>
                             <valuemap/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Template JMX Generic LLD:jmx[&quot;java.lang:type=MemoryPool,name={#JMXBEAN}&quot;,Usage.used].last(0)}&gt;({Template JMX Generic LLD:jmx[&quot;java.lang:type=MemoryPool,name={#JMXBEAN}&quot;,Usage.max].last(0)}*0.7)</expression>
-                            <name>70% MemoryPool {#JMXBEAN} used on {HOSTNAME}</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>3</priority>
-                            <description/>
-                            <type>0</type>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template JMX Generic LLD:jmx[&quot;java.lang:type=MemoryPool,name={#JMXBEAN}&quot;,Usage.committed].last(0)}={Template JMX Generic LLD:jmx[&quot;java.lang:type=MemoryPool,name={#JMXBEAN}&quot;,Usage.max].last(0)}</expression>
-                            <name>MemoryPool {#JMXBEAN} fully committed on {HOSTNAME}</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                        </trigger_prototype>
-                    </trigger_prototypes>
+                    <trigger_prototypes/>
                     <graph_prototypes>
                         <graph_prototype>
                             <name>Memory Pool {#JMXBEAN}</name>
@@ -985,7 +966,7 @@ Tenured Gen</description>
     <triggers>
         <trigger>
             <expression>{Template JMX Generic LLD:jmx[&quot;java.lang:type=OperatingSystem&quot;,OpenFileDescriptorCount].last(0)}&gt;({Template JMX Generic LLD:jmx[&quot;java.lang:type=OperatingSystem&quot;,MaxFileDescriptorCount].last(0)}*0.7)</expression>
-            <name>70% Opened File Descriptor Count used on {HOSTNAME}</name>
+            <name>Java: 70% Opened File Descriptor Count used on {HOSTNAME}</name>
             <url/>
             <status>0</status>
             <priority>3</priority>
@@ -995,20 +976,10 @@ Tenured Gen</description>
         </trigger>
         <trigger>
             <expression>{Template JMX Generic LLD:jmx[&quot;java.lang:type=Runtime&quot;,Uptime].nodata(60)}=1</expression>
-            <name>{HOSTNAME} is not reachable</name>
+            <name>Java: JMX on {HOSTNAME} is not reachable</name>
             <url/>
             <status>0</status>
             <priority>3</priority>
-            <description/>
-            <type>0</type>
-            <dependencies/>
-        </trigger>
-        <trigger>
-            <expression>{Template JMX Generic LLD:jmx[&quot;java.lang:type=Compilation&quot;,Name].str(Server)}#1</expression>
-            <name>{HOSTNAME} uses suboptimal jit compiler</name>
-            <url/>
-            <status>1</status>
-            <priority>1</priority>
             <description/>
             <type>0</type>
             <dependencies/>
