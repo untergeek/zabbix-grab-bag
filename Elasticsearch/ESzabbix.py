@@ -84,24 +84,22 @@ else: # Not clusterwide, check the next arg
     for nodename in nodestats['nodes']:
         if sys.argv[1] in nodestats['nodes'][nodename]['name']:
             if sys.argv[2] in indexingkeys:
-                indexstats = nodestats['nodes'][nodename]['indices']['indexing']
+                stats = nodestats['nodes'][nodename]['indices']['indexing']
             elif sys.argv[2] in storekeys:
-                indexstats = nodestats['nodes'][nodename]['indices']['store']
+                stats = nodestats['nodes'][nodename]['indices']['store']
             elif sys.argv[2] in getkeys:
-                indexstats = nodestats['nodes'][nodename]['indices']['get']
+                stats = nodestats['nodes'][nodename]['indices']['get']
             elif sys.argv[2] in docskeys:
-                indexstats = nodestats['nodes'][nodename]['indices']['docs']
+                stats = nodestats['nodes'][nodename]['indices']['docs']
             elif sys.argv[2] in searchkeys:
-                indexstats = nodestats['nodes'][nodename]['indices']['search']
+                stats = nodestats['nodes'][nodename]['indices']['search']
+            elif sys.argv[2] in cachekeys:
+                stats = nodestats['nodes'][nodename]['indices']['cache']
             try:
-                returnval = indexstats[sys.argv[2]]
+                returnval = stats[sys.argv[2]]
             except Exception, e:
                 pass
 
-        else:
-            nodecache = nodestats['nodes'][nodename]['indices']['cache']
-            if sys.argv[2] in cachekeys:
-                returnval = nodecache[sys.argv[2]]
 
 # If we somehow did not get a value here, that's a problem.  Send back the standard 
 # ZBX_NOTSUPPORTED
