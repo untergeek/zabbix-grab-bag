@@ -6,14 +6,15 @@ At this time, the script is also expecting authentication-free access to the JMX
 It expects 3 arguments
 
 * A string to be searched for (e.g. MemoryPool or GarbageCollector)
-	-This could be extended, but most of what I need to discover here has been either
+	- This could be extended, but most of what I need to discover here has been either
 		- MemoryPool, or
 		- GarbageCollector
+
 * The JMX server IP address or resolvable hostname
 	- Currently, templated items use the system macro, {HOST.IP}.  I suppose this could work with {HOST.CONN}, but no attempt has been made to change this yet.
 
 * The JMX server port
-	-The template expects a macro, {$JMXPORT}. Each item uses this.  It can be set as a global, template or host-level macro.
+	- The template expects a macro, {$JMXPORT}. Each item uses this.  It can be set as a global, template or host-level macro.
 
 
 The output for LLD looks like this:
