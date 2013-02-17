@@ -1,0 +1,1 @@
+UserParameter=vfs.fs.lastshadowcopy[*],powershell -ExecutionPolicy Unrestricted -File vfs.fs.lastshadowcopy.ps1 $1
