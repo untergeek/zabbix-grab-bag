@@ -1,0 +1,26 @@
+vfs.fs.lastshadowcopy returns the UNIX timestamp where when the last shadowcopy
+on a volume has been made. Query it as follows:
+
+vfs.fs.lastshadowcopy[C]
+
+It will also accept
+
+vfs.fs.lastshadowcopy[C:]
+
+This function will return "0" when shadow copies is disabled on a volume.
+
+When creating an item:
+Type: Numeric (unsigned)
+Data type: Decimal
+Units: unixtime
+
+
+Example triggers:
+
+{host:vfs.fs.lastshadowcopy[C].nodata(172800)}=1 | {host:vfs.fs.lastshadowcopy[C].fuzzytime(172800)}=0
+
+-> Go off if no shadow copy has been made in the last 48 hours
+
+{host:vfs.fs.lastshadowcopy[{#FSNAME}].regexp(^0$)}=1
+
+-> Go off if shadow copies is disabled
