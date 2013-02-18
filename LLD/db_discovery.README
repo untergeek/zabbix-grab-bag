@@ -1,0 +1,4 @@
+bd_discovery.pl will loop through the output of /proc/partitions to find all block devices on a machine.
+The intent if for this to be used with LLD to monitor read/write operations on block devices.
+
+I have only tested this in CentOS 6.2, but I see no reason for it to not work in other linux distributions.
