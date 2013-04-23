@@ -39,6 +39,7 @@ if sys.argv[1] == 'cluster':
     if sys.argv[2] in clusterkeys:
         nodestats = conn.cluster_stats()
         subtotal = 0
+        passcount = 0
         for nodename in nodestats['nodes']:
             if sys.argv[2] in indexingkeys:
                 indexstats = nodestats['nodes'][nodename]['indices']['indexing']
@@ -48,10 +49,13 @@ if sys.argv[1] == 'cluster':
                 indexstats = nodestats['nodes'][nodename]['indices']['get']
             elif sys.argv[2] in docskeys:
                 indexstats = nodestats['nodes'][nodename]['indices']['docs']
+                # Docs are cluster-wide, despite the sub-index being "by node".  Until this is changed, we have to do this by passcount
+                passcount += 1
             elif sys.argv[2] in searchkeys:
                 indexstats = nodestats['nodes'][nodename]['indices']['search']
             try:
-                subtotal += indexstats[sys.argv[2]]
+                if passcount < 2:
+                    subtotal += indexstats[sys.argv[2]]
             except Exception, e:
                 pass
         returnval = subtotal
