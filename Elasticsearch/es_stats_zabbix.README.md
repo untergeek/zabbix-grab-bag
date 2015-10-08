@@ -4,17 +4,19 @@ Use es_stats_zabbix (python module) to monitor Elasticsearch.  Extensible to
 allow you to add items from the ClusterHealth, ClusterStats, ClusterState,
 NodesStats, and NodesInfo APIs.  Key names can look like:
 
+```
 health[status]
 clusterstats[indices.docs.count]
 clusterstate[master_node]
 nodeinfo[YOUR_NODE_NAME,process.max_file_descriptors]
 nodestats[YOUR_NODE_NAME,process.open_file_descriptors]
+```
 
 ### Caveats
 
-You can't monitor any deeply nested keys with periods in the key name (like an
+ - You can't monitor any deeply nested keys with periods in the key name (like an
 IP address)
-Zabbix item key length limits you to 255 characters.  This potentially also limits
+ - Zabbix item key length limits you to 255 characters.  This potentially also limits
 deeply nested keys.
 
 ### Installation
@@ -23,34 +25,40 @@ deeply nested keys.
 
 **Install the `es_stats_zabbix` python module by running:**
 
-`(sudo) pip install es_stats_zabbix`
+```
+(sudo) pip install es_stats_zabbix
+```
 
 This will install an _entrypoint,_ which is to say a pointer script in your
-regular path.  It could be /usr/bin/es_stats_zabbix, or it could be at
-/usr/local/bin/es_stats_zabbix.  You will need to determine this by running
+regular path.  It could be `/usr/bin/es_stats_zabbix`, or it could be at
+`/usr/local/bin/es_stats_zabbix`.  You will need to determine this by running
 `which es_stats_zabbix`, as the location will matter.
 
 **Zabbix value maps**
 
 Create the following before importing the template:
 
+```
 ES Cluster State
 0 ⇒ Green
 1 ⇒ Yellow
 2 ⇒ Red
+```
 
+```
 Exit Code
 0 ⇒ SUCCESS
 1 ⇒ FAIL
+```
 
 #### Configuration
 
 **Configuration file**
 
-Copy the provided es_stats_zabbix.ini.sample to the path of your choice, and drop
-the .sample part.  Edit the file and change the [elasticsearch] and [logging]
-sections now.  In the batch sections labeled [thirty_seconds], [sixty_seconds],
-and [five_minutes], be sure to change the host from zabbix_host in each to the
+Copy the provided `es_stats_zabbix.ini.sample` to the path of your choice, and drop
+the `.sample` part.  Edit the file and change the `[elasticsearch]` and `[logging]`
+sections now.  In the batch sections labeled `[thirty_seconds]`, `[sixty_seconds]`,
+and `[five_minutes]`, be sure to change the `host` from `zabbix_host` in each to the
 host you will link to the template.
 
 **es_stats_zabbix.userparm**
@@ -83,14 +91,14 @@ in the resulting JSON.
 
 ### Troubleshooting
 
-The provided ini file defaults to logging to /dev/null.  It is much easier to
+The provided ini file defaults to logging to `/dev/null`.  It is much easier to
 troubleshoot with a log file.  Simple change the path to somewhere your Zabbix
 agent has write permissions.
 
-#### debug = True vs. loglevel = DEBUG
+#### `debug = True` vs. `loglevel = DEBUG`
 
-There is a difference.  Setting debug = True will mean seeing all of the upstream
-modules debug logs: elasticsearch, urllib3, etc.  This is _very_ verbose and
-will probably not be necessary for you.  Setting loglevel = DEBUG will give the
-debug logging messages of just es_stats_zabbix and zbxsend, which should make it
+There is a difference.  Setting `debug = True` will mean seeing all of the upstream
+modules debug logs: `elasticsearch`, `urllib3`, etc.  This is _very_ verbose and
+will probably not be necessary for you.  Setting `loglevel = DEBUG` will give the
+debug logging messages of just `es_stats_zabbix` and `zbxsend`, which should make it
 easy to see what's going on.
