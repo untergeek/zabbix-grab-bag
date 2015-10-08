@@ -1,0 +1,6 @@
+UserParameter=health[*],/usr/local/bin/es_stats_zabbix --configuration /opt/zabbix/es_stats_zabbix.ini single health[$1]
+UserParameter=clusterstats[*],/usr/local/bin/es_stats_zabbix --configuration /opt/zabbix/es_stats_zabbix.ini single clusterstats[$1]
+UserParameter=clusterstate[*],/usr/local/bin/es_stats_zabbix --configuration /opt/zabbix/es_stats_zabbix.ini single clusterstate[$1]
+UserParameter=nodestats[*],/usr/local/bin/es_stats_zabbix --configuration /opt/zabbix/es_stats_zabbix.ini single nodestats[$1]
+UserParameter=nodeinfo[*],/usr/local/bin/es_stats_zabbix --configuration /opt/zabbix/es_stats_zabbix.ini single nodeinfo[$1]
+UserParameter=es_stats_batch[*],/usr/local/bin/es_stats_zabbix --configuration /opt/zabbix/es_stats_zabbix.ini batch --name $1

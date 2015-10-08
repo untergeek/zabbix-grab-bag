@@ -1,0 +1,106 @@
+[elasticsearch]
+host = 127.0.0.1
+port = 9200
+
+; Whether or not to use SSL
+use_ssl = False
+
+; Provide your own certificate for verification
+certificate = None
+
+; If true, do not validate SSL certificates
+ssl_no_validate = False
+
+; http_auth should be in user:pass format
+http_auth = None
+
+; If true, connect only if client is the elected master node
+master_only = False
+
+; Timeout to connect to Elasticsearch.  Default is 10 seconds
+timeout = 10
+
+[logging]
+;debug setting is overridden by the command-line arg, if present
+debug = False
+loglevel = INFO
+
+;logfile = /path/to/logfile
+logfile = /dev/null
+
+; can be default or logstash (JSON logging)
+logformat = default
+
+[batch]
+; Zabbix server address
+server = 127.0.0.1
+
+; Zabbix server port
+port = 10051
+
+; Zabbix host (where the items will go)
+host = zabbix_host
+
+; Keys can be of any label other than the above
+key1  = health[status]
+key2  = health[number_of_nodes]
+key3  = health[unassigned_shards]
+key4  = health[active_primary_shards]
+key5  = health[relocating_shards]
+key6  = health[active_shards]
+key7  = health[initializing_shards]
+key8  = health[number_of_data_nodes]
+key9  = health[delayed_unassigned_shards]
+
+key10 = clusterstats[indices.store.size_in_bytes]
+key11 = clusterstats[indices.count]
+key12 = clusterstats[indices.docs.count]
+key13 = clusterstats[indices.fielddata.evictions]
+key14 = clusterstats[indices.fielddata.memory_size_in_bytes]
+key15 = clusterstats[indices.filter_cache.evictions]
+key16 = clusterstats[indices.filter_cache.memory_size_in_bytes]
+
+key17 = clusterstate[master_node]
+
+key18 = nodeinfo[YOUR_NODE_NAME,jvm.mem.heap_init_in_bytes]
+key19 = nodeinfo[YOUR_NODE_NAME,process.max_file_descriptors]
+
+key20 = nodestats[YOUR_NODE_NAME,process.open_file_descriptors]
+key21 = nodestats[YOUR_NODE_NAME,jvm.mem.heap_max_in_bytes]
+key22 = nodestats[YOUR_NODE_NAME,jvm.mem.heap_used_in_bytes]
+key23 = nodestats[YOUR_NODE_NAME,jvm.mem.heap_used_percent]
+key24 = nodestats[YOUR_NODE_NAME,jvm.gc.collectors.old.collection_count]
+key25 = nodestats[YOUR_NODE_NAME,jvm.gc.collectors.old.collection_time_in_millis]
+
+[thirty_seconds]
+server = 127.0.0.1
+port = 10051
+host = zabbix_host
+
+key1  = health[unassigned_shards]
+key2  = health[relocating_shards]
+key3  = health[initializing_shards]
+key4  = health[delayed_unassigned_shards]
+
+[sixty_seconds]
+server = 127.0.0.1
+port = 10051
+host = zabbix_host
+
+key1  = clusterstats[indices.docs.count]
+key2  = clusterstats[indices.fielddata.evictions]
+key3  = clusterstats[indices.fielddata.memory_size_in_bytes]
+key4  = clusterstats[indices.filter_cache.evictions]
+key5  = clusterstats[indices.filter_cache.memory_size_in_bytes]
+
+[five_minutes]
+server = 127.0.0.1
+port = 10051
+host = zabbix_host
+
+key1  = health[number_of_nodes]
+key2  = health[active_primary_shards]
+key3  = health[active_shards]
+key4  = health[number_of_data_nodes]
+key5  = clusterstats[indices.store.size_in_bytes]
+key6  = clusterstats[indices.count]

@@ -1,0 +1,8 @@
+0.1.0 (7 October 2015)
+ - Use es_stats_zabbix python module (which has an entrypoint/shell script)
+ - New template
+ - Support for both batch mode (lots of keys sent as trappers) or single key (UserParm) mode
+ - Config file for Elasticsearch, logging, and batch configuration parameters
+
+0.0.1 (21 December 2012)
+ - Initial Changelog
