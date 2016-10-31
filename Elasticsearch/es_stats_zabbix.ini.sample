@@ -1,5 +1,5 @@
 [elasticsearch]
-host = 127.0.0.1
+host = HOST_TO_REPORT_UNDER
 port = 9200
 
 ; Whether or not to use SSL
@@ -33,13 +33,13 @@ logformat = default
 
 [batch]
 ; Zabbix server address
-server = 127.0.0.1
+server = ZABBIX_SERVER_OR_PROXY
 
 ; Zabbix server port
 port = 10051
 
 ; Zabbix host (where the items will go)
-host = zabbix_host
+host = HOST_TO_REPORT_UNDER
 
 ; Keys can be of any label other than the above
 key1  = health[status]
@@ -62,20 +62,10 @@ key16 = clusterstats[indices.filter_cache.memory_size_in_bytes]
 
 key17 = clusterstate[master_node]
 
-key18 = nodeinfo[YOUR_NODE_NAME,jvm.mem.heap_init_in_bytes]
-key19 = nodeinfo[YOUR_NODE_NAME,process.max_file_descriptors]
-
-key20 = nodestats[YOUR_NODE_NAME,process.open_file_descriptors]
-key21 = nodestats[YOUR_NODE_NAME,jvm.mem.heap_max_in_bytes]
-key22 = nodestats[YOUR_NODE_NAME,jvm.mem.heap_used_in_bytes]
-key23 = nodestats[YOUR_NODE_NAME,jvm.mem.heap_used_percent]
-key24 = nodestats[YOUR_NODE_NAME,jvm.gc.collectors.old.collection_count]
-key25 = nodestats[YOUR_NODE_NAME,jvm.gc.collectors.old.collection_time_in_millis]
-
 [thirty_seconds]
-server = 127.0.0.1
+server = ZABBIX_SERVER_OR_PROXY
 port = 10051
-host = zabbix_host
+host = HOST_TO_REPORT_UNDER
 
 key1  = health[unassigned_shards]
 key2  = health[relocating_shards]
@@ -83,9 +73,9 @@ key3  = health[initializing_shards]
 key4  = health[delayed_unassigned_shards]
 
 [sixty_seconds]
-server = 127.0.0.1
+server = ZABBIX_SERVER_OR_PROXY
 port = 10051
-host = zabbix_host
+host = HOST_TO_REPORT_UNDER
 
 key1  = clusterstats[indices.docs.count]
 key2  = clusterstats[indices.fielddata.evictions]
@@ -94,9 +84,9 @@ key4  = clusterstats[indices.filter_cache.evictions]
 key5  = clusterstats[indices.filter_cache.memory_size_in_bytes]
 
 [five_minutes]
-server = 127.0.0.1
+server = ZABBIX_SERVER_OR_PROXY
 port = 10051
-host = zabbix_host
+host = HOST_TO_REPORT_UNDER
 
 key1  = health[number_of_nodes]
 key2  = health[active_primary_shards]
@@ -104,3 +94,13 @@ key3  = health[active_shards]
 key4  = health[number_of_data_nodes]
 key5  = clusterstats[indices.store.size_in_bytes]
 key6  = clusterstats[indices.count]
+
+key7 = nodeinfo[_local,jvm.mem.heap_init_in_bytes]
+key8 = nodeinfo[_local,process.max_file_descriptors]
+
+key9 = nodestats[_local,process.open_file_descriptors]
+key10 = nodestats[_local,jvm.mem.heap_max_in_bytes]
+key11 = nodestats[_local,jvm.mem.heap_used_in_bytes]
+key12 = nodestats[_local,jvm.mem.heap_used_percent]
+key13 = nodestats[_local,jvm.gc.collectors.old.collection_count]
+key14 = nodestats[_local,jvm.gc.collectors.old.collection_time_in_millis]

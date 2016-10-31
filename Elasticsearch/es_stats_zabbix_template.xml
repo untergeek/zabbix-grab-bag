@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>2.0</version>
-    <date>2015-10-08T00:25:33Z</date>
+    <version>3.0</version>
+    <date>2016-10-31T19:01:21Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -24,15 +24,58 @@
             </applications>
             <items>
                 <item>
-                    <name>Cluster Stats Batch Run: $1</name>
+                    <name>Elasticsearch Cluster State: $1</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>es_stats_batch[thirty_seconds]</key>
-                    <delay>30</delay>
-                    <history>7</history>
-                    <trends>14</trends>
+                    <key>clusterstate[master_node]</key>
+                    <delay>300</delay>
+                    <history>90</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>1</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>clusterstats[indices.count]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -63,9 +106,308 @@
                             <name>ES Cluster</name>
                         </application>
                     </applications>
-                    <valuemap>
-                        <name>Exit Code</name>
-                    </valuemap>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>clusterstats[indices.docs.count]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>clusterstats[indices.fielddata.evictions]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>clusterstats[indices.fielddata.memory_size_in_bytes]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>clusterstats[indices.filter_cache.evictions]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>clusterstats[indices.filter_cache.memory_size_in_bytes]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>clusterstats[indices.store.size_in_bytes]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Cluster: Documents indexed per second</name>
+                    <type>15</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>docs_indexed_per_second</key>
+                    <delay>60</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params>1*last(&quot;clusterstats[indices.docs.count]&quot;)</params>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
@@ -76,8 +418,8 @@
                     <snmp_oid/>
                     <key>es_stats_batch[five_minutes]</key>
                     <delay>300</delay>
-                    <history>7</history>
-                    <trends>14</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -121,8 +463,8 @@
                     <snmp_oid/>
                     <key>es_stats_batch[sixty_seconds]</key>
                     <delay>60</delay>
-                    <history>7</history>
-                    <trends>14</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -159,58 +501,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster: Documents indexed per second</name>
-                    <type>15</type>
+                    <name>Cluster Stats Batch Run: $1</name>
+                    <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>docs_indexed_per_second</key>
-                    <delay>60</delay>
-                    <history>30</history>
+                    <key>es_stats_batch[thirty_seconds]</key>
+                    <delay>30</delay>
+                    <history>90</history>
                     <trends>365</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>1</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params>1*last(&quot;clusterstats[indices.docs.count]&quot;)</params>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>ES Cluster</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Elasticsearch Cluster Health: $1</name>
-                    <type>2</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>health[initializing_shards]</key>
-                    <delay>0</delay>
-                    <history>30</history>
-                    <trends>90</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -241,7 +540,9 @@
                             <name>ES Cluster</name>
                         </application>
                     </applications>
-                    <valuemap/>
+                    <valuemap>
+                        <name>Exit Code</name>
+                    </valuemap>
                     <logtimefmt/>
                 </item>
                 <item>
@@ -252,8 +553,8 @@
                     <snmp_oid/>
                     <key>health[active_primary_shards]</key>
                     <delay>0</delay>
-                    <history>7</history>
-                    <trends>90</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -295,50 +596,7 @@
                     <snmp_oid/>
                     <key>health[active_shards]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>90</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>ES Cluster</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Elasticsearch Cluster Health: $1</name>
-                    <type>2</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>health[number_of_data_nodes]</key>
-                    <delay>0</delay>
-                    <history>7</history>
+                    <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
@@ -381,8 +639,8 @@
                     <snmp_oid/>
                     <key>health[delayed_unassigned_shards]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>90</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -418,14 +676,14 @@
                 </item>
                 <item>
                     <name>Elasticsearch Cluster Health: $1</name>
-                    <type>0</type>
+                    <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>health[status]</key>
-                    <delay>20</delay>
-                    <history>30</history>
-                    <trends>90</trends>
+                    <key>health[initializing_shards]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -456,9 +714,7 @@
                             <name>ES Cluster</name>
                         </application>
                     </applications>
-                    <valuemap>
-                        <name>ES Cluster State</name>
-                    </valuemap>
+                    <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
@@ -467,10 +723,10 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>health[relocating_shards]</key>
+                    <key>health[number_of_data_nodes]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>90</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -512,7 +768,7 @@
                     <snmp_oid/>
                     <key>health[number_of_nodes]</key>
                     <delay>0</delay>
-                    <history>7</history>
+                    <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
@@ -553,10 +809,10 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>health[unassigned_shards]</key>
+                    <key>health[relocating_shards]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>90</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -591,17 +847,17 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster State: $1</name>
+                    <name>Elasticsearch Cluster Health: $1</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstate[master_node]</key>
-                    <delay>300</delay>
-                    <history>7</history>
+                    <key>health[status]</key>
+                    <delay>30</delay>
+                    <history>90</history>
                     <trends>365</trends>
                     <status>0</status>
-                    <value_type>1</value_type>
+                    <value_type>3</value_type>
                     <allowed_hosts/>
                     <units/>
                     <delta>0</delta>
@@ -630,19 +886,21 @@
                             <name>ES Cluster</name>
                         </application>
                     </applications>
-                    <valuemap/>
+                    <valuemap>
+                        <name>ES Cluster State</name>
+                    </valuemap>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <name>Elasticsearch Cluster Health: $1</name>
                     <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstats[indices.count]</key>
+                    <key>health[unassigned_shards]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>356</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -677,15 +935,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <name>Elasticsearch Node Info: $2</name>
                     <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstats[indices.filter_cache.evictions]</key>
+                    <key>nodeinfo[_local,jvm.mem.heap_init_in_bytes]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>356</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -720,15 +978,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <name>Elasticsearch Node Info: $2</name>
                     <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstats[indices.fielddata.memory_size_in_bytes]</key>
+                    <key>nodeinfo[_local,process.max_file_descriptors]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>356</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -763,15 +1021,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <name>Elasticsearch Node Stats: $2</name>
                     <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstats[indices.filter_cache.memory_size_in_bytes]</key>
+                    <key>nodestats[_local,jvm.gc.collectors.old.collection_count]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>356</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -806,15 +1064,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <name>Elasticsearch Node Stats: $2</name>
                     <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstats[indices.store.size_in_bytes]</key>
+                    <key>nodestats[_local,jvm.gc.collectors.old.collection_time_in_millis]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>356</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -849,15 +1107,15 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <name>Elasticsearch Node Stats: $2</name>
                     <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstats[indices.docs.count]</key>
+                    <key>nodestats[_local,jvm.mem.heap_max_in_bytes]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>356</trends>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -892,15 +1150,101 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Elasticsearch Cluster Stats: $1</name>
+                    <name>Elasticsearch Node Stats: $2</name>
                     <type>2</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>clusterstats[indices.fielddata.evictions]</key>
+                    <key>nodestats[_local,jvm.mem.heap_used_in_bytes]</key>
                     <delay>0</delay>
-                    <history>30</history>
-                    <trends>356</trends>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Node Stats: $2</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[_local,jvm.mem.heap_used_percent]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>ES Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Elasticsearch Node Stats: $2</name>
+                    <type>2</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>nodestats[_local,process.open_file_descriptors]</key>
+                    <delay>0</delay>
+                    <history>90</history>
+                    <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
@@ -946,7 +1290,7 @@
             <expression>{Elasticsearch Cluster:health[status].last()}=2</expression>
             <name>Cluster in RED state</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>5</priority>
             <description>Cluster in RED state.  There are shards without replicas.</description>
             <type>0</type>
@@ -956,7 +1300,7 @@
             <expression>{Elasticsearch Cluster:health[status].last()}=3</expression>
             <name>Cluster in unknown state</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>4</priority>
             <description>Cannot determine cluster state.</description>
             <type>0</type>
@@ -966,7 +1310,7 @@
             <expression>{Elasticsearch Cluster:health[status].last()}=1</expression>
             <name>Cluster in YELLOW state</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>2</priority>
             <description>Cluster in YELLOW state.  All primary shards are present, but there are shards without replicas.</description>
             <type>0</type>
@@ -976,7 +1320,7 @@
             <expression>{Elasticsearch Cluster:health[status].nodata(300)}=1</expression>
             <name>Health status checks</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>5</priority>
             <description>Health status checks have not run properly the last 5 minutes</description>
             <type>0</type>
@@ -986,7 +1330,7 @@
             <expression>{Elasticsearch Cluster:health[initializing_shards].last()}&gt;0</expression>
             <name>Initializing shards: {ITEM.LASTVALUE}</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>1</priority>
             <description/>
             <type>0</type>
@@ -996,7 +1340,7 @@
             <expression>({TRIGGER.VALUE}=0 and {Elasticsearch Cluster:health[number_of_nodes].last()}&lt;{Elasticsearch Cluster:health[number_of_nodes].min(5m)}) or ({TRIGGER.VALUE}=1 and {Elasticsearch Cluster:health[number_of_nodes].last(0)}&lt;{Elasticsearch Cluster:health[number_of_nodes].max(1d)})</expression>
             <name>Number of nodes: {ITEM.LASTVALUE}</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>4</priority>
             <description>The number of nodes suddenly dropped below the maximum number seen in the last day.</description>
             <type>0</type>
@@ -1006,7 +1350,7 @@
             <expression>{Elasticsearch Cluster:health[relocating_shards].last()}&gt;0</expression>
             <name>Relocating shards: {ITEM.LASTVALUE}</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>1</priority>
             <description/>
             <type>0</type>
@@ -1016,7 +1360,7 @@
             <expression>{Elasticsearch Cluster:health[unassigned_shards].last()}&gt;0</expression>
             <name>Unassigned shards: {ITEM.LASTVALUE}</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>2</priority>
             <description/>
             <type>0</type>
@@ -1028,4 +1372,36 @@
             </dependencies>
         </trigger>
     </triggers>
+    <value_maps>
+        <value_map>
+            <name>ES Cluster State</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Green</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Yellow</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>Red</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Exit Code</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Success</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Fail</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
 </zabbix_export>
