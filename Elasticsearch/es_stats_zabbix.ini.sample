@@ -97,3 +97,10 @@ key6  = clusterstats[indices.count]
 
 key7 = nodeinfo[_local,jvm.mem.heap_init_in_bytes]
 key8 = nodeinfo[_local,process.max_file_descriptors]
+
+key9 = nodestats[_local,process.open_file_descriptors]
+key10 = nodestats[_local,jvm.mem.heap_max_in_bytes]
+key11 = nodestats[_local,jvm.mem.heap_used_in_bytes]
+key12 = nodestats[_local,jvm.mem.heap_used_percent]
+key13 = nodestats[_local,jvm.gc.collectors.old.collection_count]
+key14 = nodestats[_local,jvm.gc.collectors.old.collection_time_in_millis]
